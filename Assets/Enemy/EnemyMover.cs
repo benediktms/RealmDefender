@@ -11,7 +11,7 @@ public class EnemyMover : MonoBehaviour
     [Range(0f, 5f)]
     float speed = 1f;
 
-    void Start()
+    private void OnEnable()
     {
         FindPath();
         ReturnToStart();
@@ -55,6 +55,6 @@ public class EnemyMover : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
