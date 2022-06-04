@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2045166488354009288, guid: ab2366e79487aeda28c10960d5c34a22, type: 3}
+      propertyPath: isPlaceable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5409352381739403265, guid: ab2366e79487aeda28c10960d5c34a22, type: 3}
       propertyPath: m_Name
       value: Tile_RoadBend_BL
