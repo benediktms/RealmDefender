@@ -7,20 +7,57 @@ public class TargetLocator : MonoBehaviour
     [SerializeField]
     Transform weapon;
 
-    Transform target;
+    [SerializeField]
+    float towerRange = 15f;
 
-    void Start()
-    {
-        target = FindObjectOfType<EnemyMover>().transform;
-    }
+    [SerializeField]
+    ParticleSystem projectileParticle;
+
+    Transform target;
 
     void Update()
     {
+        FindClosesTarget();
         AimWeapon();
+    }
+
+    private void FindClosesTarget()
+    {
+        Enemy[] enemies = FindObjectsOfType<Enemy>();
+        Transform closesTarget = null;
+        float maxDistance = Mathf.Infinity;
+
+        foreach (Enemy enemy in enemies)
+        {
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < maxDistance)
+            {
+                closesTarget = enemy.transform;
+                maxDistance = distance;
+            }
+        }
+
+        target = closesTarget;
     }
 
     private void AimWeapon()
     {
-        weapon.LookAt(target);
+        float targetDistance = Vector3.Distance(transform.position, target.position);
+
+        if (targetDistance < towerRange)
+        {
+            weapon.LookAt(target);
+            Attack(true);
+        }
+        else
+        {
+            Attack(false);
+        }
+    }
+
+    private void Attack(bool isActive)
+    {
+        var emissionModule = projectileParticle.emission;
+        emissionModule.enabled = isActive;
     }
 }
