@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [ExecuteAlways]
+[RequireComponent(typeof(TextMeshPro))]
 public class CoordinateLabeler : MonoBehaviour
 {
     [SerializeField]
@@ -35,23 +36,22 @@ public class CoordinateLabeler : MonoBehaviour
             UpdateObjectName();
         }
 
-        ColorCoordinates();
+        SetLabelColor();
         ToggleLables();
     }
 
     private void DisplayCooridnates()
     {
-        float snapSettingsMoveX = UnityEditor.EditorSnapSettings.move.x;
-        float snapSettingsMoveZ = UnityEditor.EditorSnapSettings.move.z;
+        // NOTE: this will cause a build error. Editor settings will have to be moved into the Assets/Editor folder when the game is built.
+        var snapSettingsMove = UnityEditor.EditorSnapSettings.move;
 
-        coordinate.x = Mathf.RoundToInt(transform.parent.position.x / snapSettingsMoveX);
-        coordinate.y = Mathf.RoundToInt(transform.parent.position.z / snapSettingsMoveZ);
+        coordinate.x = Mathf.RoundToInt(transform.parent.position.x / snapSettingsMove.x);
+        coordinate.y = Mathf.RoundToInt(transform.parent.position.z / snapSettingsMove.z);
 
         label.text = $"{coordinate.x},{coordinate.y}";
-        ColorCoordinates();
     }
 
-    private void ColorCoordinates()
+    private void SetLabelColor()
     {
         label.color = waypoint.IsPlaceable ? defaultColor : blockedColor;
     }
