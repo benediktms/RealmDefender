@@ -11,6 +11,13 @@ public class EnemyMover : MonoBehaviour
     [Range(0f, 5f)]
     float speed = 1f;
 
+    Enemy enemy;
+
+    private void Start()
+    {
+        enemy = FindObjectOfType<Enemy>();
+    }
+
     private void OnEnable()
     {
         FindPath();
@@ -55,6 +62,7 @@ public class EnemyMover : MonoBehaviour
             }
         }
 
+        enemy.PenalizeGold();
         gameObject.SetActive(false);
     }
 }
