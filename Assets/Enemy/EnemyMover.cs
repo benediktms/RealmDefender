@@ -36,11 +36,10 @@ public class EnemyMover : MonoBehaviour
         {
             Waypoint waypoint = child.GetComponent<Waypoint>();
 
-            if (!waypoint)
+            if (waypoint != null)
             {
                 path.Add(waypoint);
             }
-
         }
     }
 
