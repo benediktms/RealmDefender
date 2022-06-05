@@ -5,12 +5,14 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField]
+    [Range(0.1f, 30f)]
     float spawnRate = 2f;
 
     [SerializeField]
     GameObject prefab;
 
     [SerializeField]
+    [Range(1, 50)]
     int poolSize = 5;
 
     GameObject[] pool;
