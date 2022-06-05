@@ -11,7 +11,7 @@ public class ObjectPool : MonoBehaviour
     GameObject prefab;
 
     [SerializeField]
-    int poolSize = 10;
+    int poolSize = 5;
 
     GameObject[] pool;
 
