@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField]
@@ -33,7 +34,13 @@ public class EnemyMover : MonoBehaviour
 
         foreach (Transform child in parent.transform)
         {
-            path.Add(child.GetComponent<Waypoint>());
+            Waypoint waypoint = child.GetComponent<Waypoint>();
+
+            if (!waypoint)
+            {
+                path.Add(waypoint);
+            }
+
         }
     }
 
@@ -62,6 +69,11 @@ public class EnemyMover : MonoBehaviour
             }
         }
 
+        FinishPath();
+    }
+
+    private void FinishPath()
+    {
         enemy.PenalizeGold();
         gameObject.SetActive(false);
     }
